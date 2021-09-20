@@ -6,13 +6,22 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float speed;
-    private Vector3 position = Vector3.zero;
+    private Vector3 _position = Vector3.zero;
+    private Rigidbody _rb;
+
+    private void Awake()
+    {
+        _rb = GetComponent<Rigidbody>();
+    }
 
     private void Update()
     {
-        position.x = Input.GetAxis("Horizontal") * Time.deltaTime * speed;
-        position.z = Input.GetAxis("Vertical") * Time.deltaTime * speed;
+        _position.x = Input.GetAxis("Horizontal") * speed;
+        _position.z = Input.GetAxis("Vertical") * speed;
+    }
 
-        transform.Translate(position);
+    private void FixedUpdate()
+    {
+        _rb.MovePosition(_rb.position + _position * (Time.deltaTime * speed));
     }
 }
