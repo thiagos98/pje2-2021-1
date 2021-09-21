@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class Bolinha : MonoBehaviour
 {
     public float speed;
     private Vector3 _position = Vector3.zero;
