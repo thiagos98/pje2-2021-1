@@ -37,11 +37,13 @@ public class BolinhaFisica : MonoBehaviour
 
     private void OnCollisionStay(Collision other)
     {
-        isJumping = false;
+        if(other.gameObject.CompareTag("Ground"))
+            isJumping = false;
     }
 
     private void OnCollisionExit(Collision other)
     {
-        isJumping = true;
+        if(other.gameObject.CompareTag("Ground"))
+            isJumping = true;
     }
 }
