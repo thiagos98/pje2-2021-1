@@ -1,16 +1,15 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-public class CameraFollow : MonoBehaviour
+namespace Camera
 {
-    [SerializeField] private Transform target;
-    [SerializeField] private Vector3 offset;
-
-    private void Update()
+    public class CameraFollow : MonoBehaviour
     {
-        transform.position = target.position + offset;
+        [SerializeField] private Transform target;
+        [SerializeField] private Vector3 offset;
+
+        private void Update()
+        {
+            transform.position = target.position + offset;
+        }
     }
 }
