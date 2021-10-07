@@ -61,4 +61,12 @@ public class BolinhaFisica : MonoBehaviour
             gameController.SetPanelGameOver(true, 0f);
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Danger"))
+        {
+            gameController.SetPanelGameOver(true, 0f);
+        }
+    }
 }

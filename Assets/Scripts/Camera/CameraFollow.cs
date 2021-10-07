@@ -11,7 +11,7 @@ namespace Camera
 
         private void Start()
         {
-            transform.rotation = Quaternion.Euler(45, 0, 0);
+            transform.rotation = Quaternion.Euler(30, 0, 0);
         }
 
         private void FixedUpdate()
