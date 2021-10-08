@@ -1,28 +1,26 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using General;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 public class BolinhaFisica : MonoBehaviour
 {
-    private Rigidbody _rb;
+    [HideInInspector] public Rigidbody rb;
     private float _vertical = 0f;
     private float _horizontal = 0f;
     private bool _isJumping;
+    public bool CanMove { get; set; } = true;
     public float speed = 2f;
     public float jumpForce = 2f;
-    private GameController gameController;
+    public Vector3 startPointBall;
 
     private void Awake()
     {
-        TryGetComponent(out _rb);
+        TryGetComponent(out rb);
     }
 
     private void Start()
     {
-        gameController = FindObjectOfType<GameController>();
+        startPointBall = transform.position;
     }
 
     private void Update()
@@ -33,12 +31,14 @@ public class BolinhaFisica : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _rb.AddForce(0, 0,  speed * _vertical, ForceMode.Force);
-        _rb.AddForce(speed * _horizontal, 0,  0, ForceMode.Force);
+        if (!CanMove) return;
+        
+        rb.AddForce(0, 0,  speed * _vertical, ForceMode.Force);
+        rb.AddForce(speed * _horizontal, 0,  0, ForceMode.Force);
 
         if (Input.GetKey(KeyCode.Space) && !_isJumping)
         {
-            _rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
+            rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
         }
     }
 
@@ -52,21 +52,5 @@ public class BolinhaFisica : MonoBehaviour
     {
         if(other.gameObject.layer == 6)
             _isJumping = true;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.CompareTag("Finish"))
-        {
-            gameController.SetPanelGameOver(true, 0f);
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.CompareTag("Danger"))
-        {
-            gameController.SetPanelGameOver(true, 0f);
-        }
     }
 }

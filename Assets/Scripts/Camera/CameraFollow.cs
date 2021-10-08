@@ -8,11 +8,7 @@ namespace Camera
         [SerializeField] private Transform target;
         [SerializeField] private float speed = 3f;
         [SerializeField] private float distance = 0.5f;
-
-        private void Start()
-        {
-            transform.rotation = Quaternion.Euler(30, 0, 0);
-        }
+        [SerializeField] private float height = 0.2f;
 
         private void FixedUpdate()
         {
@@ -20,7 +16,7 @@ namespace Camera
             var position = transform.position;
 
             position.x = Mathf.Lerp(transform.position.x, target.position.x, time);
-            position.y = Mathf.Lerp(transform.position.y + distance, target.position.y, time);
+            position.y = Mathf.Lerp(transform.position.y + height, target.position.y, time);
             position.z = Mathf.Lerp(transform.position.z - distance, target.position.z, time);
             
             transform.position = position;
