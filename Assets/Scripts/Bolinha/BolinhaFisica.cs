@@ -8,7 +8,7 @@ public class BolinhaFisica : MonoBehaviour
     private float _vertical = 0f;
     private float _horizontal = 0f;
     private bool _isJumping;
-    public bool CanMove { get; set; } = true;
+    public bool CanMove { get; set; } = false;
     public float speed = 2f;
     public float jumpForce = 2f;
     public Vector3 startPointBall;
