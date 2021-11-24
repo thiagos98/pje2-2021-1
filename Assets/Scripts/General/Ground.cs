@@ -1,34 +1,35 @@
-using System;
 using System.Collections;
-using General;
 using UnityEngine;
 
-public class Ground : MonoBehaviour, IResettable
+namespace General
 {
-    public BolinhaFisica ball;
-    private void FixedUpdate()
+    public class Ground : MonoBehaviour, IResettable
     {
-        var position = ball.transform.position;
-        position.y = transform.position.y;
-        transform.position = position;
-    }
+        [SerializeField] private BolinhaFisica ball;
+        private void FixedUpdate()
+        {
+            var position = ball.transform.position;
+            position.y = transform.position.y;
+            transform.position = position;
+        }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!other.CompareTag("Player")) return;
-        other.TryGetComponent(out Rigidbody rb);
-        if (rb) StartCoroutine(ResetBall(rb));
-    }
+        private void OnTriggerEnter(Collider other)
+        {
+            if (!other.CompareTag("Player")) return;
+            other.TryGetComponent(out Rigidbody rb);
+            if (rb) StartCoroutine(ResetBall(rb));
+        }
 
-    public IEnumerator ResetBall (Rigidbody rb)
-    {
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
+        public IEnumerator ResetBall (Rigidbody rb)
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
         
-        yield return new WaitForFixedUpdate();
+            yield return new WaitForFixedUpdate();
 
-        rb.transform.position = ball.startPointBall;
-        rb.transform.rotation = Quaternion.identity;
-    }
+            rb.transform.position = ball.startPointBall;
+            rb.transform.rotation = Quaternion.identity;
+        }
     
+    }
 }

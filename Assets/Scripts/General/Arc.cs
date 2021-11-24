@@ -6,7 +6,7 @@ namespace General
 {
     public class Arc : MonoBehaviour, IResettable
     {
-        public BolinhaFisica ball;
+        [SerializeField] private BolinhaFisica ball;
         private void OnCollisionEnter(Collision other)
         {
             if (!other.gameObject.CompareTag("Player")) return;

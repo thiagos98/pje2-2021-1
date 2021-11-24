@@ -1,5 +1,5 @@
-using System;
 using UnityEngine;
+using System;
 
 [RequireComponent(typeof(Rigidbody))]
 public class BolinhaFisica : MonoBehaviour
